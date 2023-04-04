@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automarket", "Automarket\Automarket.csproj", "{B3E3384F-F3D6-456C-BB29-2964A8ECEA0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{C411C634-D8E3-46E9-9A21-DC71258AAC92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automarket.Domain", "Automarket.Domain\Automarket.Domain.csproj", "{7FF3E712-663C-49BD-B180-90CD95892C0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3E3384F-F3D6-456C-BB29-2964A8ECEA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3E3384F-F3D6-456C-BB29-2964A8ECEA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3E3384F-F3D6-456C-BB29-2964A8ECEA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3E3384F-F3D6-456C-BB29-2964A8ECEA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF3E712-663C-49BD-B180-90CD95892C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF3E712-663C-49BD-B180-90CD95892C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF3E712-663C-49BD-B180-90CD95892C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF3E712-663C-49BD-B180-90CD95892C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7FF3E712-663C-49BD-B180-90CD95892C0F} = {C411C634-D8E3-46E9-9A21-DC71258AAC92}
+	EndGlobalSection
+EndGlobal
