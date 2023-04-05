@@ -1,38 +1,33 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Automarket.DAL.Interfaces;
 using Automarket.Domain.Entity;
+using Automarket.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Automarket.Controllers
 {
     public class CarController : Controller
     {
-        private readonly ICarRepository _carRepository;
+        private readonly ICarService _carService;
 
-        public CarController(ICarRepository carRepository)
+        public CarController(ICarService carService)
         {
-            _carRepository = carRepository;
+            _carService = carService;
         }
 
         // GET
         [HttpGet]
         public async Task<IActionResult> GetCars()
         {
-            var response = await _carRepository.Select();
-            var response1 = await _carRepository.GetByName("BMW");
-            var response2 = await _carRepository.Get(3);
-            var car = new Car()
+            var response = await _carService.GetCars();
+
+            if (response.StatusCode == Domain.Enam.StatusCode.OK)
             {
-                Name = "mazda",
-                Model = "mazda",
-                Speed = 200,
-                Price = 20000
-            };
+                return View(response.Data);
+            }
 
-            await _carRepository.Create(car);
-            await _carRepository.Delete(car);
-
-            return View(response);
+            return RedirectToAction("Error");
         }
     }
 }
