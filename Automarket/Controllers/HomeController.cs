@@ -21,7 +21,13 @@ namespace Automarket.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var car = new Car()
+            {
+                Name = "BMW",
+                Model = "dddd",
+                Speed = 220
+            };
+            return View(car);
         }
 
         public IActionResult Privacy()
