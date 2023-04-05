@@ -14,17 +14,15 @@ namespace Automarket.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICarRepository _carRepository;
 
-        public HomeController(ILogger<HomeController> logger, ICarRepository carRepository)
+
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _carRepository = carRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var response = await _carRepository.Select();
             return View();
         }
 

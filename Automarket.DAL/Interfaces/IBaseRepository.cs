@@ -2,15 +2,17 @@
 using System.Threading.Tasks;
 using Automarket.Domain.Entity;
 
-namespace Automarket.DAL.Interfaces;
-
-public interface IBaseRepository<T>
+namespace Automarket.DAL.Interfaces
 {
-    bool Create(T entity);
 
-    T Get(int id);
+    public interface IBaseRepository<T>
+    {
+        Task<bool> Create(T entity);
 
-    Task<List<Car>> Select();
+        Task<Car> Get(int id);
 
-    bool Delete(T entity);
+        Task<List<Car>> Select();
+
+        Task<bool> Delete(T entity);
+    }
 }
