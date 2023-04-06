@@ -160,6 +160,44 @@ namespace Automarket.Service.Implementations
                     StatusCode = StatusCode.CarNotFound
                 };
             }
+
+            return baseResponse;
+        }
+
+        public async Task<IBaseResponse<Car>> Edit(int id, CarViewModel carViewModel)
+        {
+            var baseResponse = new BaseResponse<Car>();
+
+            try
+            {
+                var car = await _carRepository.Get(id);
+
+                if (car == null)
+                {
+                    baseResponse.Description = "автобобиль не найден";
+                    baseResponse.StatusCode = StatusCode.CarNotFound;
+                    return baseResponse;
+                }
+
+                car.Description = carViewModel.Description;
+                car.Model = carViewModel.Model;
+                car.Name = carViewModel.Name;
+                car.Price = carViewModel.Price;
+                car.Speed = carViewModel.Speed;
+                car.DateCreate = carViewModel.DateCreate;
+                car.TypeCar = (TypeCar)Convert.ToInt32(carViewModel.TypeCar);
+
+                await _carRepository.Update(car);
+            }
+            catch (Exception e)
+            {
+                return new BaseResponse<Car>()
+                {
+                    Description = $"[Edit] : {e.Message}",
+                    StatusCode = StatusCode.CarNotFound
+                };
+            }
+
             return baseResponse;
         }
     }
