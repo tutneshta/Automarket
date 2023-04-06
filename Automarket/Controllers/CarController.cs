@@ -30,7 +30,7 @@ namespace Automarket.Controllers
                 return View(response.Data);
             }
 
-            return RedirectToAction("Error");
+            return Redirect("Error");
         }
 
         [HttpGet]
@@ -43,7 +43,7 @@ namespace Automarket.Controllers
                 return View(response.Data);
             }
 
-            return RedirectToAction("Error");
+            return Redirect("Error");
         }
 
         [HttpGet]
@@ -57,7 +57,7 @@ namespace Automarket.Controllers
                 return RedirectToAction("GetCars");
             }
 
-            return RedirectToAction("Error");
+            return Redirect("Error");
         }
 
         [HttpGet]
@@ -70,7 +70,7 @@ namespace Automarket.Controllers
                 return View(response.Data);
             }
 
-            return RedirectToAction("Error");
+            return Redirect("Error");
         }
 
         [HttpGet]
@@ -88,7 +88,7 @@ namespace Automarket.Controllers
                 return View(response.Data);
             }
 
-            return RedirectToAction("Error");
+            return Redirect("Error");
         }
 
         [HttpPost]
@@ -109,7 +109,8 @@ namespace Automarket.Controllers
                 return RedirectToAction("GetCars");
             }
 
-            return RedirectToAction("Error");
+            return Redirect("Error");
         }
+        
     }
 }
