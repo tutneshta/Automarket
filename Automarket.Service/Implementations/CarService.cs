@@ -5,6 +5,7 @@ using Automarket.DAL.Interfaces;
 using Automarket.Domain.Enam;
 using Automarket.Domain.Entity;
 using Automarket.Domain.Response;
+using Automarket.Domain.ViewModels.Car;
 using Automarket.Service.Interfaces;
 
 namespace Automarket.Service.Implementations
@@ -35,7 +36,6 @@ namespace Automarket.Service.Implementations
                 baseResponse.Data = cars;
                 baseResponse.StatusCode = StatusCode.OK;
                 return baseResponse;
-
             }
             catch (Exception e)
             {
@@ -44,7 +44,123 @@ namespace Automarket.Service.Implementations
                     Description = $"[GetCars] : {e.Message}"
                 };
             }
-            
+        }
+
+        public async Task<IBaseResponse<Car>> GetCar(int id)
+        {
+            var baseResponse = new BaseResponse<Car>();
+
+            try
+            {
+                var car = await _carRepository.Get(id);
+
+                if (car == null)
+                {
+                    baseResponse.Description = "Найдено 0 элементов";
+                    baseResponse.StatusCode = StatusCode.CarNotFound;
+                    return baseResponse;
+                }
+
+                baseResponse.Data = car;
+                baseResponse.StatusCode = StatusCode.OK;
+                return baseResponse;
+            }
+            catch (Exception e)
+            {
+                return new BaseResponse<Car>()
+                {
+                    Description = $"[GetCar] : {e.Message}",
+                    StatusCode = StatusCode.CarNotFound
+                };
+            }
+        }
+
+        public async Task<IBaseResponse<Car>> GetCarByName(string name)
+        {
+            var baseResponse = new BaseResponse<Car>();
+
+            try
+            {
+                var car = await _carRepository.GetByName(name);
+
+                if (car == null)
+                {
+                    baseResponse.Description = "Найдено 0 элементов";
+                    baseResponse.StatusCode = StatusCode.CarNotFound;
+                    return baseResponse;
+                }
+
+                baseResponse.Data = car;
+                return baseResponse;
+            }
+            catch (Exception e)
+            {
+                return new BaseResponse<Car>()
+                {
+                    Description = $"[GetCarByName] : {e.Message}",
+                    StatusCode = StatusCode.CarNotFound
+                };
+            }
+        }
+
+        public async Task<IBaseResponse<bool>> DeleteCar(int id)
+        {
+            var baseResponse = new BaseResponse<bool>();
+
+            try
+            {
+                var car = await _carRepository.Get(id);
+
+                if (car == null)
+                {
+                    baseResponse.Description = "автобобиль не найден";
+                    baseResponse.StatusCode = StatusCode.CarNotFound;
+                    return baseResponse;
+                }
+
+                await _carRepository.Delete(car);
+            }
+            catch (Exception e)
+            {
+                return new BaseResponse<bool>()
+                {
+                    Description = $"[DeleteCar] : {e.Message}",
+                    StatusCode = StatusCode.CarNotFound
+                };
+            }
+
+            return baseResponse;
+        }
+
+        public async Task<IBaseResponse<CarViewModel>> CreateCar(CarViewModel carViewModel)
+        {
+            var baseResponse = new BaseResponse<CarViewModel>();
+
+            try
+            {
+                var car = new Car()
+                {
+                    Description = carViewModel.Description,
+                    Model = carViewModel.Model,
+                    Name = carViewModel.Name,
+                    Price = carViewModel.Price,
+                    Speed = carViewModel.Speed,
+                    DateCreate = carViewModel.DateCreate,
+                    TypeCar = (TypeCar)Convert.ToInt32(carViewModel.TypeCar)
+                };
+
+                await _carRepository.Create(car);
+                baseResponse.StatusCode = StatusCode.OK;
+            }
+            catch (Exception e)
+            {
+                return new BaseResponse<CarViewModel>()
+                {
+                    Description = $"[CreateCar] : {e.Message}",
+                    StatusCode = StatusCode.CarNotFound
+                };
+            }
+            return baseResponse;
         }
     }
 }
